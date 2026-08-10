@@ -1,0 +1,3 @@
+export type Field={key:string;label:string;hint:string;unit:string;defaultValue:number;min?:number;step?:number};
+export type CheckerMode="nansen"|"hyperliquid"|"abstract"|"official";
+export type CalculatorConfig={slug:string;name:string;eyebrow:string;title:string;description:string;accent:string;accent2:string;background:string;surface:string;text:string;muted:string;logo:string;officialUrl:string;docsUrl:string;portalUrl:string;formulaLabel:string;disclaimer:string;checkerMode:CheckerMode;checkerText:string;facts:string[];fields:Field[];calculate:(v:Record<string,number>)=>{score:number;secondary:string;breakdown:{label:string;value:number}[]}};

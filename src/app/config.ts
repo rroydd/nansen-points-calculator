@@ -1,19 +1,2 @@
-export type Field = { key: string; label: string; hint: string; unit: string; defaultValue: number; min?: number; step?: number };
-export type CalculatorConfig = {
-  slug: string; name: string; eyebrow: string; title: string; description: string; accent: string;
-  officialUrl: string; docsUrl: string; portalUrl: string; formulaLabel: string; disclaimer: string;
-  fields: Field[]; calculate: (v: Record<string, number>) => { score: number; secondary: string; breakdown: { label: string; value: number }[] };
-};
-export const config: CalculatorConfig = {
-  slug: "nansen", name: "Nansen", eyebrow: "NANSEN · SEASON 3", title: "Nansen Points Calculator",
-  description: "Estimate NXP from Hyperliquid perps volume and add the points already visible in your Nansen account.", accent: "#8cffc1",
-  officialUrl: "https://app.nansen.ai/points", docsUrl: "https://academy.nansen.ai/articles/2294471-points-from-trading", portalUrl: "https://alpha-tools.pro/",
-  formulaLabel: "Official trading rate: 1 NXP per $400 of Hyperliquid perps volume.",
-  disclaimer: "Nansen may change rates, eligibility and weekly validation. Subscription, staking, referral and quest rewards must be added from your account.",
-  fields: [
-    { key: "volume", label: "Weekly perps volume", hint: "Eligible Hyperliquid perps volume executed through Nansen", unit: "$", defaultValue: 10000, min: 0, step: 100 },
-    { key: "existing", label: "Existing NXP", hint: "Your activated balance before this week", unit: "NXP", defaultValue: 1000, min: 0, step: 1 },
-    { key: "other", label: "Other earned points", hint: "Subscriptions, staking, referrals and onboarding quests", unit: "NXP", defaultValue: 0, min: 0, step: 1 }
-  ],
-  calculate: (v) => { const trading = v.volume / 400; const score = v.existing + v.other + trading; return { score, secondary: `${trading.toLocaleString("en-US", { maximumFractionDigits: 2 })} NXP from trading`, breakdown: [{label:"Trading",value:trading},{label:"Existing",value:v.existing},{label:"Other",value:v.other}] }; }
-};
+import type { CalculatorConfig } from "./config.types";
+export const config:CalculatorConfig={slug:"nansen",name:"Nansen",eyebrow:"NANSEN · SEASON 3",title:"Nansen Points Calculator",accent:"#00FFA7",accent2:"#09C385",background:"#071311",surface:"#122927",text:"#F2FFFA",muted:"#9EB9B0",logo:"/logos/nansen.png",checkerMode:"nansen",checkerText:"Check the real public Nansen Points tier for any wallet. Nansen's public endpoint exposes tier, not the exact NXP balance, and refreshes daily.",facts:["Eligible Hyperliquid perps volume through Nansen earns 1 NXP per $400.","The public API returns tier only: none, green, ice, north or star.","Subscription, staking, referral and quest points must be read from the signed-in account."],description:"Estimate NXP from eligible Hyperliquid perps volume and combine it with points already visible in your Nansen account.",officialUrl:"https://app.nansen.ai/points",docsUrl:"https://docs.nansen.ai/api/points",portalUrl:"https://alpha-tools-tau.vercel.app/",formulaLabel:"Official trading rate: 1 NXP per $400 of Hyperliquid perps volume.",disclaimer:"Nansen may change rates, eligibility and weekly validation. Exact NXP is private; the live checker shows only the tier returned by Nansen.",fields:[{key:"volume",label:"Weekly perps volume",hint:"Eligible Hyperliquid perps volume executed through Nansen",unit:"$",defaultValue:10000,min:0,step:100},{key:"fees",label:"Trading fees paid",hint:"Track your real farming cost separately from volume",unit:"$",defaultValue:5,min:0,step:.01},{key:"existing",label:"Existing NXP",hint:"Your activated balance before this week",unit:"NXP",defaultValue:1000,min:0,step:1},{key:"other",label:"Other earned points",hint:"Subscriptions, staking, referrals and onboarding quests",unit:"NXP",defaultValue:0,min:0,step:1}],calculate:v=>{const trading=v.volume/400,score=v.existing+v.other+trading;return{score,secondary:`${trading.toLocaleString("en-US",{maximumFractionDigits:2})} NXP from trading · $${v.fees.toLocaleString("en-US",{maximumFractionDigits:2})} cost`,breakdown:[{label:"Trading",value:trading},{label:"Existing",value:v.existing},{label:"Other",value:v.other}]}}};
