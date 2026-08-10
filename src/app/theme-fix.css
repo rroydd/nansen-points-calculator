@@ -1,0 +1,3 @@
+html,body{min-height:100%}
+main{background-color:var(--page)}
+body:has(main){background:var(--page)}
