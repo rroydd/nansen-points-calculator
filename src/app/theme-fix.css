@@ -1,3 +1,266 @@
-html,body{min-height:100%}
-main{background-color:var(--page)}
-body:has(main){background:var(--page)}
+html,
+body {
+  min-height: 100%;
+  background: var(--page, #f7faf8);
+}
+
+body:has(main) {
+  background: var(--page);
+  color: var(--ink);
+}
+
+main {
+  background-color: var(--page) !important;
+  color: var(--ink) !important;
+}
+
+main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 6%, color-mix(in srgb, var(--accent) 13%, transparent), transparent 30%),
+    linear-gradient(140deg, color-mix(in srgb, var(--accent2) 8%, var(--page)), var(--page) 45%);
+}
+
+main > * {
+  position: relative;
+  z-index: 1;
+}
+
+.truth {
+  border-color: color-mix(in srgb, var(--accent) 58%, var(--ink)) !important;
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface)) !important;
+  color: var(--ink) !important;
+  font-weight: 500 !important;
+}
+
+.panel,
+.notice {
+  color: var(--ink);
+  box-shadow: 0 18px 50px color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.checker h2,
+.checkHead strong,
+.metricGrid b,
+.inputs strong,
+.notice strong,
+.allocation h2,
+.allocation label > span {
+  color: var(--ink) !important;
+}
+
+.checker > div > p:not(.eyebrow),
+.metricGrid small,
+.metricGrid em,
+.allocationIntro > p:not(.eyebrow),
+.allocationIntro > small,
+.allocationInputs label > small,
+.allocationActions span {
+  color: var(--muted) !important;
+}
+
+.metricGrid > div {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface)) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--ink));
+}
+
+.checker input,
+.inputWrap {
+  background: color-mix(in srgb, var(--surface) 93%, var(--accent)) !important;
+  border-color: color-mix(in srgb, var(--ink) 28%, transparent) !important;
+  color: var(--ink) !important;
+}
+
+.checker input::placeholder {
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+.checker button,
+.cta,
+.share {
+  color: #07110a !important;
+}
+
+.warning {
+  color: var(--ink) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  border-left: 3px solid var(--accent);
+}
+
+.allocation {
+  width: min(1120px, calc(100% - 40px));
+  margin: 18px auto 0;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 30px;
+}
+
+.allocationIntro h2 {
+  margin: 8px 0;
+  font-size: 28px;
+}
+
+.allocationIntro > p:not(.eyebrow) {
+  margin: 0;
+  max-width: 500px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.allocationValue {
+  margin: 24px 0 2px;
+  color: var(--accent);
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+}
+
+.allocationIntro > small,
+.allocationInputs label > small {
+  display: block;
+  font: 11px/1.5 DM Mono, monospace;
+}
+
+.allocationInputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.allocationInputs label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--ink) 13%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 4%, var(--surface));
+}
+
+.allocationInputs label > span {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.allocationInputs .inputWrap {
+  width: 100%;
+}
+
+.allocationActions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 4px;
+}
+
+.share {
+  min-height: 50px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.creator {
+  color: var(--ink) !important;
+  font-weight: 600;
+}
+
+.sharePage {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 40px 0;
+}
+
+.shareCard {
+  width: min(760px, calc(100% - 40px));
+  padding: clamp(28px, 6vw, 60px);
+}
+
+.shareCard h1 {
+  margin: 12px 0 30px;
+}
+
+.sharedMetrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.sharedMetrics > div {
+  padding: 22px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--ink));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+}
+
+.sharedMetrics small,
+.sharedMetrics strong {
+  display: block;
+}
+
+.sharedMetrics small {
+  color: var(--muted);
+  font: 11px DM Mono, monospace;
+}
+
+.sharedMetrics strong {
+  margin-top: 10px;
+  color: var(--ink);
+  font-size: clamp(24px, 5vw, 42px);
+}
+
+.shareCard > p:not(.eyebrow) {
+  margin: 24px 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.sharedBy {
+  display: inline-block;
+  margin-top: 22px;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 760px) {
+  .allocation {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+
+  .allocationInputs {
+    grid-template-columns: 1fr;
+  }
+
+  .allocationActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .share {
+    width: 100%;
+  }
+
+  footer {
+    height: auto !important;
+    padding: 35px 0;
+    text-align: center;
+  }
+
+  .sharedMetrics {
+    grid-template-columns: 1fr;
+  }
+}
